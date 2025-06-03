@@ -1,23 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:food_app/src/ui/onboard/onboarding.dart';
-import 'package:food_app/src/ui/splash/splash_screen.dart';
+import 'package:food_app/src/ui/auth/login_screen.dart';
+import 'package:food_app/src/ui/auth/register_screen.dart';
 
-void main() {
-  runApp(const MyApp());
+void main(){
+  runApp(MyApp());
 }
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: OnboardingScreen()
+      home: LoginScreen(),
     );
   }
 }
