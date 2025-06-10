@@ -1,18 +1,43 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:food_app/src/ui/widget/button_widget.dart';
 import 'package:food_app/src/ui/widget/textfield_widget.dart';
 
-class ForgotPassword extends StatefulWidget {
-  const ForgotPassword({super.key});
+class VerificationScreen extends StatefulWidget {
+  const VerificationScreen({super.key});
 
   @override
-  State<ForgotPassword> createState() => _ForgotPasswordState();
+  State<VerificationScreen> createState() => _VerificationScreenState();
 }
 
-class _ForgotPasswordState extends State<ForgotPassword> {
+class _VerificationScreenState extends State<VerificationScreen> {
   TextEditingController controllerEmail = TextEditingController();
   TextEditingController controllerPassword = TextEditingController();
   bool isCheck = false,obscureText = false;
+  Timer? _timer;
+  int _start = 50;
+  @override
+  void initState() {
+    startTimer();
+    super.initState();
+  }
+
+  void startTimer() {
+    _timer = Timer.periodic(Duration(seconds: 1), (Timer timer) {
+        if (_start == 0) {
+          setState(() {
+            timer.cancel();
+          });
+        } else {
+          setState(() {
+            _start--;
+          });
+        }
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -28,8 +53,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("Forgot Password",style: TextStyle(fontSize: 34,color: Colors.white),),
-                  Text("Please sign in to your existing account",style: TextStyle(fontSize: 15,color: Colors.white),)
+                  Text("Verification",style: TextStyle(fontSize: 34,color: Colors.white),),
+                  Text("We have sent a code to your email\nexample@gmail.com",textAlign: TextAlign.center,style: TextStyle(fontSize: 15,color: Colors.white),)
                 ],
               ),
             ),
@@ -49,15 +74,41 @@ class _ForgotPasswordState extends State<ForgotPassword> {
               child: Column(
                 children: [
                   Expanded(
-                    child: ListView(
+                    child: Column(
                       children: [
-                        TextFiledWidget(
-                          title: 'EMAIL',
-                          hintTex: 'exaple@gmail.com',
-                          controller: controllerEmail,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0,vertical: 10),
+                          child: Row(
+                            children: [
+                              Text("CODE",style: TextStyle(fontSize: 16),),
+                              Spacer(),
+                              TextButton(onPressed: (){
+                                if(_start == 0){
+                                  _start = 50;
+                                  setState(() {
+
+                                  });
+                                  startTimer();
+                                }else{
+                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Hali vaqt borr")));
+                                }
+                              }, child:Text("Resend",style: TextStyle(fontSize: 16,color: Colors.red),),),
+                              Text("in:$_start",style: TextStyle(fontSize: 18),),
+                            ],
+                          ),
                         ),
+                        // Transform.rotate(angle: (_start.toDouble()/10),child:   Container(
+                        //   width: 10,
+                        //   height: 100,
+                        //   decoration: BoxDecoration(
+                        //       color: Colors.deepOrangeAccent,
+                        //     borderRadius: BorderRadius.only(
+                        //       topRight: Radius.circular(50),
+                        //       topLeft: Radius.circular(50),
+                        //     )
+                        //   ),
+                        // ),)
                       ],
-                      padding: EdgeInsets.zero,
                     ),
                   ),
                   ButtonWidget(onTap: (){
