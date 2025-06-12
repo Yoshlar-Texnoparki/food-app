@@ -1,8 +1,8 @@
 import 'dart:async';
-
+import 'package:food_app/src/ui/home/home_screen.dart';
+import 'package:pinput/pinput.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/src/ui/widget/button_widget.dart';
-import 'package:food_app/src/ui/widget/textfield_widget.dart';
 
 class VerificationScreen extends StatefulWidget {
   const VerificationScreen({super.key});
@@ -15,8 +15,8 @@ class _VerificationScreenState extends State<VerificationScreen> {
   TextEditingController controllerEmail = TextEditingController();
   TextEditingController controllerPassword = TextEditingController();
   bool isCheck = false,obscureText = false;
-  Timer? _timer;
   int _start = 50;
+  String _code = "1234";
   @override
   void initState() {
     startTimer();
@@ -24,7 +24,7 @@ class _VerificationScreenState extends State<VerificationScreen> {
   }
 
   void startTimer() {
-    _timer = Timer.periodic(Duration(seconds: 1), (Timer timer) {
+    Timer.periodic(Duration(seconds: 1), (Timer timer) {
         if (_start == 0) {
           setState(() {
             timer.cancel();
@@ -97,17 +97,32 @@ class _VerificationScreenState extends State<VerificationScreen> {
                             ],
                           ),
                         ),
-                        // Transform.rotate(angle: (_start.toDouble()/10),child:   Container(
-                        //   width: 10,
-                        //   height: 100,
-                        //   decoration: BoxDecoration(
-                        //       color: Colors.deepOrangeAccent,
-                        //     borderRadius: BorderRadius.only(
-                        //       topRight: Radius.circular(50),
-                        //       topLeft: Radius.circular(50),
-                        //     )
-                        //   ),
-                        // ),)
+                        Pinput(
+                          length: 4,
+                          defaultPinTheme: PinTheme(
+                            margin: EdgeInsets.symmetric(horizontal: 12),
+                              width: 62,
+                              height: 62,
+                              textStyle: TextStyle(fontSize: 20, color: Color.fromRGBO(30, 60, 87, 1), fontWeight: FontWeight.w600),
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.black),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                        ),
+                          pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
+                          showCursor: true,
+                          onCompleted: (code){
+                            if(code == _code){
+                              Navigator.push(context, MaterialPageRoute(builder: (ctx){
+                                return HomeScreen();
+                              }));
+                              // ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("KOD TASDIQLANDI"),backgroundColor: Colors.green,));
+                            }else{
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("KOD TASDIQLANMADI"),backgroundColor: Colors.red,));
+
+                            }
+                          },
+                        ),
                       ],
                     ),
                   ),

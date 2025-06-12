@@ -3,6 +3,7 @@ import 'package:food_app/src/ui/auth/forgot_password_screen.dart';
 import 'package:food_app/src/ui/auth/login_screen.dart';
 import 'package:food_app/src/ui/auth/register_screen.dart';
 import 'package:food_app/src/ui/auth/verification_screen.dart';
+import 'package:food_app/src/ui/splash/splash_screen.dart';
 
 void main(){
   runApp(MyApp());
