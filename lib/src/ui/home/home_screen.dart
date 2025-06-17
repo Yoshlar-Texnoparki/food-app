@@ -9,6 +9,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int selectedIndex = 2;
+  String search = "all";
   List<Category> categories = [
     Category(name: "All", image: Icon(Icons.fastfood)),
     Category(name: "Burger", image: Icon(Icons.fastfood)),
@@ -33,6 +34,42 @@ class _HomeScreenState extends State<HomeScreen> {
         time: "20 min"),
     Restaurant(
         name: "Banonza",
+        delivered: "free",
+        foods: "Tort - Shirinliklar - Coffe - Choy ",
+        rating: 4.7,
+        time: "10 min"),
+    Restaurant(
+        name: "Milly",
+        delivered: "free",
+        foods: "Tort - Shirinliklar - Coffe - Choy ",
+        rating: 4.7,
+        time: "10 min"),
+    Restaurant(
+        name: "Kafe",
+        delivered: "free",
+        foods: "Tort - Shirinliklar - Coffe - Choy ",
+        rating: 4.7,
+        time: "10 min"),
+    Restaurant(
+        name: "KFC",
+        delivered: "free",
+        foods: "Tort - Shirinliklar - Coffe - Choy ",
+        rating: 4.7,
+        time: "10 min"),
+    Restaurant(
+        name: "Pizza",
+        delivered: "free",
+        foods: "Tort - Shirinliklar - Coffe - Choy ",
+        rating: 4.7,
+        time: "10 min"),
+    Restaurant(
+        name: "EVOS",
+        delivered: "free",
+        foods: "Tort - Shirinliklar - Coffe - Choy ",
+        rating: 4.7,
+        time: "10 min"),
+    Restaurant(
+        name: "Yalla",
         delivered: "free",
         foods: "Tort - Shirinliklar - Coffe - Choy ",
         rating: 4.7,
@@ -121,6 +158,29 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: Color(0xFFF6F6F6),
                 ),
                 child: TextField(
+                  onSubmitted: (query){
+                    for(int i =0; i<restaurant.length;i++){
+                      if(restaurant[i].name.contains(query)){
+                        setState(() {
+                          search = query;
+                        });
+                      }else if(query.isEmpty){
+                        search = "all";
+                        setState(() {});
+                      }
+                      else{
+                        setState(() {
+                          search = query;
+                        });
+                      }
+                    }
+                    query = 'all';
+                    setState(() {
+
+                    });
+                    print(search);
+
+                  },
                   decoration: InputDecoration(
                       prefixIcon: Icon(Icons.search),
                       border: InputBorder.none,
@@ -201,67 +261,138 @@ class _HomeScreenState extends State<HomeScreen> {
               physics: NeverScrollableScrollPhysics(),
               shrinkWrap: true,
                 itemBuilder: (ctx,index){
-              return SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: 225,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Container(
-                      width: double.infinity,
-                      height: 137,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.grey),
-                    ),
-                    Text(
-                      restaurant[index].name,
-                      style: TextStyle(fontSize: 23),
-                    ),
-                    Text(
-                      restaurant[index].foods,
-                      style: TextStyle(fontSize: 14, color: Colors.grey),
-                    ),
-                    SizedBox(
-                      height: 8,
-                    ),
-                    Row(
+                if(restaurant[index].name == search){
+                  return SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: 225,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Icon(
-                          Icons.star_border,
-                          color: Colors.orange,
+                        Container(
+                          width: double.infinity,
+                          height: 137,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.grey),
                         ),
                         Text(
-                          restaurant[index].rating.toString(),
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          restaurant[index].name,
+                          style: TextStyle(fontSize: 23),
+                        ),
+                        Text(
+                          restaurant[index].foods,
+                          style: TextStyle(fontSize: 14, color: Colors.grey),
                         ),
                         SizedBox(
-                          width: 22,
+                          height: 8,
                         ),
-                        Icon(
-                          Icons.delivery_dining_outlined,
-                          color: Colors.orange,
-                        ),
-                        Text(
-                          restaurant[index].delivered,
-                          style: TextStyle(fontWeight: FontWeight.normal),
-                        ),
-                        SizedBox(
-                          width: 22,
-                        ),
-                        Icon(
-                          Icons.access_time_sharp,
-                          color: Colors.orange,
-                        ),
-                        Text(
-                          restaurant[index].time,
-                          style: TextStyle(fontWeight: FontWeight.normal),
-                        ),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.star_border,
+                              color: Colors.orange,
+                            ),
+                            Text(
+                              restaurant[index].rating.toString(),
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              width: 22,
+                            ),
+                            Icon(
+                              Icons.delivery_dining_outlined,
+                              color: Colors.orange,
+                            ),
+                            Text(
+                              restaurant[index].delivered,
+                              style: TextStyle(fontWeight: FontWeight.normal),
+                            ),
+                            SizedBox(
+                              width: 22,
+                            ),
+                            Icon(
+                              Icons.access_time_sharp,
+                              color: Colors.orange,
+                            ),
+                            Text(
+                              restaurant[index].time,
+                              style: TextStyle(fontWeight: FontWeight.normal),
+                            ),
+                          ],
+                        )
                       ],
-                    )
-                  ],
-                ),
-              );
+                    ),
+                  );
+                }
+                else if(search == "all" || search == ""){
+                  return SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: 225,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          width: double.infinity,
+                          height: 137,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10),
+                              color: Colors.grey),
+                        ),
+                        Text(
+                          restaurant[index].name,
+                          style: TextStyle(fontSize: 23),
+                        ),
+                        Text(
+                          restaurant[index].foods,
+                          style: TextStyle(fontSize: 14, color: Colors.grey),
+                        ),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        Row(
+                          children: [
+                            Icon(
+                              Icons.star_border,
+                              color: Colors.orange,
+                            ),
+                            Text(
+                              restaurant[index].rating.toString(),
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            SizedBox(
+                              width: 22,
+                            ),
+                            Icon(
+                              Icons.delivery_dining_outlined,
+                              color: Colors.orange,
+                            ),
+                            Text(
+                              restaurant[index].delivered,
+                              style: TextStyle(fontWeight: FontWeight.normal),
+                            ),
+                            SizedBox(
+                              width: 22,
+                            ),
+                            Icon(
+                              Icons.access_time_sharp,
+                              color: Colors.orange,
+                            ),
+                            Text(
+                              restaurant[index].time,
+                              style: TextStyle(fontWeight: FontWeight.normal),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  );
+                }
+                else if(restaurant[index].name != search){
+                  return SizedBox();
+                }
+                else{
+                  return SizedBox();
+                }
             })
             ],
           ),
