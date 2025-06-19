@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/src/ui/deatil/product_deatil_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -262,128 +263,139 @@ class _HomeScreenState extends State<HomeScreen> {
               shrinkWrap: true,
                 itemBuilder: (ctx,index){
                 if(restaurant[index].name == search){
-                  return SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: 225,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: double.infinity,
-                          height: 137,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.grey),
-                        ),
-                        Text(
-                          restaurant[index].name,
-                          style: TextStyle(fontSize: 23),
-                        ),
-                        Text(
-                          restaurant[index].foods,
-                          style: TextStyle(fontSize: 14, color: Colors.grey),
-                        ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.star_border,
-                              color: Colors.orange,
-                            ),
-                            Text(
-                              restaurant[index].rating.toString(),
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              width: 22,
-                            ),
-                            Icon(
-                              Icons.delivery_dining_outlined,
-                              color: Colors.orange,
-                            ),
-                            Text(
-                              restaurant[index].delivered,
-                              style: TextStyle(fontWeight: FontWeight.normal),
-                            ),
-                            SizedBox(
-                              width: 22,
-                            ),
-                            Icon(
-                              Icons.access_time_sharp,
-                              color: Colors.orange,
-                            ),
-                            Text(
-                              restaurant[index].time,
-                              style: TextStyle(fontWeight: FontWeight.normal),
-                            ),
-                          ],
-                        )
-                      ],
+                  return GestureDetector(
+                    onTap: (){
+                    },
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      height: 225,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: double.infinity,
+                            height: 137,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.grey),
+                          ),
+                          Text(
+                            restaurant[index].name,
+                            style: TextStyle(fontSize: 23),
+                          ),
+                          Text(
+                            restaurant[index].foods,
+                            style: TextStyle(fontSize: 14, color: Colors.grey),
+                          ),
+                          SizedBox(
+                            height: 8,
+                          ),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.star_border,
+                                color: Colors.orange,
+                              ),
+                              Text(
+                                restaurant[index].rating.toString(),
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                width: 22,
+                              ),
+                              Icon(
+                                Icons.delivery_dining_outlined,
+                                color: Colors.orange,
+                              ),
+                              Text(
+                                restaurant[index].delivered,
+                                style: TextStyle(fontWeight: FontWeight.normal),
+                              ),
+                              SizedBox(
+                                width: 22,
+                              ),
+                              Icon(
+                                Icons.access_time_sharp,
+                                color: Colors.orange,
+                              ),
+                              Text(
+                                restaurant[index].time,
+                                style: TextStyle(fontWeight: FontWeight.normal),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   );
                 }
                 else if(search == "all" || search == ""){
-                  return SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: 225,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          width: double.infinity,
-                          height: 137,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.grey),
-                        ),
-                        Text(
-                          restaurant[index].name,
-                          style: TextStyle(fontSize: 23),
-                        ),
-                        Text(
-                          restaurant[index].foods,
-                          style: TextStyle(fontSize: 14, color: Colors.grey),
-                        ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.star_border,
-                              color: Colors.orange,
-                            ),
-                            Text(
-                              restaurant[index].rating.toString(),
-                              style: TextStyle(fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              width: 22,
-                            ),
-                            Icon(
-                              Icons.delivery_dining_outlined,
-                              color: Colors.orange,
-                            ),
-                            Text(
-                              restaurant[index].delivered,
-                              style: TextStyle(fontWeight: FontWeight.normal),
-                            ),
-                            SizedBox(
-                              width: 22,
-                            ),
-                            Icon(
-                              Icons.access_time_sharp,
-                              color: Colors.orange,
-                            ),
-                            Text(
-                              restaurant[index].time,
-                              style: TextStyle(fontWeight: FontWeight.normal),
-                            ),
-                          ],
-                        )
-                      ],
+                  return GestureDetector(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (builder){
+                        return ProductDetailScreen(data: restaurant[index],);
+                      }));
+                    },
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      height: 225,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: double.infinity,
+                            height: 137,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.grey),
+                          ),
+                          Text(
+                            restaurant[index].name,
+                            style: TextStyle(fontSize: 23),
+                          ),
+                          Text(
+                            restaurant[index].foods,
+                            style: TextStyle(fontSize: 14, color: Colors.grey),
+                          ),
+                          SizedBox(
+                            height: 8,
+                          ),
+                          Row(
+                            children: [
+                              Icon(
+                                Icons.star_border,
+                                color: Colors.orange,
+                              ),
+                              Text(
+                                restaurant[index].rating.toString(),
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                width: 22,
+                              ),
+                              Icon(
+                                Icons.delivery_dining_outlined,
+                                color: Colors.orange,
+                              ),
+                              Text(
+                                restaurant[index].delivered,
+                                style: TextStyle(fontWeight: FontWeight.normal),
+                              ),
+                              SizedBox(
+                                width: 22,
+                              ),
+                              Icon(
+                                Icons.access_time_sharp,
+                                color: Colors.orange,
+                              ),
+                              Text(
+                                restaurant[index].time,
+                                style: TextStyle(fontWeight: FontWeight.normal),
+                              ),
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   );
                 }
@@ -407,6 +419,11 @@ class Category {
   Icon image;
 
   Category({required this.name, required this.image});
+}
+class CategoryFood {
+  String name;
+
+  CategoryFood({required this.name,});
 }
 
 class Restaurant {

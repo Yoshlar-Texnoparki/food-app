@@ -3,6 +3,7 @@ import 'package:food_app/src/ui/auth/forgot_password_screen.dart';
 import 'package:food_app/src/ui/auth/login_screen.dart';
 import 'package:food_app/src/ui/auth/register_screen.dart';
 import 'package:food_app/src/ui/auth/verification_screen.dart';
+import 'package:food_app/src/ui/deatil/product_deatil_screen.dart';
 import 'package:food_app/src/ui/home/home_screen.dart';
 import 'package:food_app/src/ui/splash/splash_screen.dart';
 
@@ -16,7 +17,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: HomeScreen(
+      ),
     );
   }
 }
